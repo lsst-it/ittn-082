@@ -1,0 +1,159 @@
+\section*{Introduction}
+
+This document defines the procedures for scheduling, communicating, approving, and executing maintenance activities on the Long Haul Network (LHN) of the Vera C. Rubin Observatory. The LHN is a vital infrastructure component enabling data flow between Chile and the USDF. This policy ensures coordinated planning between LHN operators, and observatory stakeholders to reduce the risk of service disruption.
+
+\section{Types of Maintenance}
+
+\subsection{Standard Maintenances (Internal / LHN Members)}
+
+Standard maintenances are planned interventions initiated by LHN members or internal teams that do not pose an immediate operational threat. These must be proposed at least \textbf{one week in advance}.
+
+All standard maintenances require approval from the \textbf{End-to-End Responsible (E2E)}. Approvals are issued every \textbf{Tuesday afternoon at 16:00 CLT}.
+
+\subsection{Emergency Maintenances}
+
+Emergency maintenances address critical issues requiring urgent resolution to prevent or mitigate outages. These also require E2E approval, with an expedited timeline. Requests must include a \textbf{detailed justification} describing the urgency and potential risks of delay.
+
+\section{Communication Protocols}
+
+Actions to be taken by the LHN operator.
+
+\subsection{Standard Maintenances}
+
+\begin{itemize}[label=--]
+  \item Submit a \textbf{Jira ticket}.
+  \item Send a \textbf{notification email} to the LHN distribution list.
+\end{itemize}
+
+\subsection{Emergency Maintenances}
+
+\begin{itemize}[label=--]
+  \item Submit a \textbf{Jira ticket}.
+  \item Send a message to \textbf{\#rubinobs-lhn} on Slack.
+  \item Send a \textbf{notification email} to the LHN distribution list.
+\end{itemize}
+
+\subsection{Jira Guidelines}
+
+Jira accounts will be delivered to LHN operators, the following are basic guidelines to create the tickets. 
+
+\begin{itemize}[label=--]
+  \item Tickets must be created by authorized network operators.
+  \item Use the \textbf{IT Project} with \textbf{LHN} as the component.
+  \item Jira serves as the central record for approval, rejections, and execution updates.
+\end{itemize}
+
+Upon creation of the ticket, it will be assigned to a DevOps team member and all actions related to the maintenance will be followed in the ticket. 
+
+\section{Maintenance Rejections}
+
+\subsection{Standard Maintenance Rejections}
+
+\begin{itemize}[label=--]
+  \item Communicated on \textbf{Tuesdays at 16:00 CLT}.
+  \item Includes a justification, suggested alternative dates, and Jira updates.
+\end{itemize}
+
+\subsection{Emergency Maintenance Rejections}
+
+\begin{itemize}[label=--]
+  \item Communicated within \textbf{minutes or hours}, depending on severity.
+  \item Jira updated with rejection reason and E2E notes.
+\end{itemize}
+
+\section{Maintenance Communication Format}
+
+The following information must be included in the Jira ticket. This information will be used as the source of truth for the approval process. 
+
+\subsection{Standard Maintenances}
+\begin{itemize}[label=--]
+  \item Title
+  \item Description
+  \item Owner and Contacts
+  \item Affected Services
+  \item Impact of Deferral
+  \item Start and End Time (include estimated duration)
+  \item Rollback Plan
+\end{itemize}
+
+\subsection{Emergency Maintenances}
+\begin{itemize}[label=--]
+  \item Title
+  \item Description
+  \item Owner and Contacts
+  \item Affected Services
+  \item Severity
+  \item Start and End Time (include estimated duration)
+  \item Rollback Plan
+\end{itemize}
+
+\subsection{Severity Classification}
+
+Every emergency maintenance must include a severity, which will be used to prioritize it. 
+
+\begin{itemize}[label=--]
+  \item \textbf{Minor:} No impact on science observations (e.g., routine patches)
+  \item \textbf{Major:} Degraded service (e.g., data latency)
+  \item \textbf{Critical:} Blocking flow of pixels from Summit to USDF or complete service disruption
+\end{itemize}
+
+\section{Approval Workflow}
+
+\subsection{Standard Maintenance Approvals}
+
+\subsubsection{CAP Authorization}
+
+CAP Authotizations will be requested during the CAP meetings on Tuesdays. The time of the meeting changes depending on daylight saving times, hence the approvals will be released at late as 16:00 (or earlier) depending on the time of the meeting.
+
+The following is a summary of the authorization process
+
+\begin{itemize}[label=--]
+  \item Jira ticket used as source document.
+  \item E2E submits request and manages review.
+  \item Approvals released \textbf{Tuesdays at 16:00 CLT}.
+  \item Recorded in Jira.
+\end{itemize}
+
+\subsubsection{DevOps Authorization}
+
+The DevOps will evaluate the maintenance request and upon approval it will be added to the topic list of the next CAP meeting. 
+
+\begin{itemize}[label=--]
+  \item Review completed within 24 hours.
+  \item Added to next CAP meeting agenda.
+  \item Jira updated accordingly.
+\end{itemize}
+
+\subsection{Emergency Maintenance Approvals}
+
+Emergencies are typically approved on the minute/hour and do not require CAP approval, given that they should be fixing outages.
+
+To ensure smooth operations, the E2E will seek approval from the day or night summit lead. 
+
+\begin{itemize}[label=--]
+  \item Granted directly by E2E.
+  \item Decisions made within minutes or hours.
+  \item Coordination with:
+    \begin{itemize}
+      \item Night Summit Responsible (if at night)
+      \item Day Summit Responsible (if during the day)
+    \end{itemize}
+  \item Jira updated with all decisions.
+\end{itemize}
+
+\section{Maintenance Execution}
+
+After approval, the execution of the activity must adhere to the established notification process between the LHN operator and the vNOC, which will initiate an API call to Squadcast to execute the integration into Rubin tools.
+
+The following is the execution flow:
+
+\begin{itemize}[label=--]
+  \item E2E informs the \textbf{Virtual Network Operations Center (vNOC)} of approval or rejection.
+  \item Operator triggers notification to vNOC.
+  \item vNOC issues API call to Squadcast for tracking.
+  \item E2E announces maintenance in \textbf{\#summit-announce} and follows up in the dedicated channel.
+\end{itemize}
+
+\section*{Conclusion}
+
+By adhering to this structured protocol, LHN operators and observatory stakeholders help minimize operational disruptions while ensuring transparency and system uptime. Furthermore, it enables the LHN to be fully integrated into the coordinated maintenance workflow of all Rubin Observatory products.
